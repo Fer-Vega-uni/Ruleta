@@ -8,6 +8,8 @@ public class Menu {
     private final JButton btnTragamonedas    = new JButton("Proximamente");
     private final JButton btnJuego3          = new JButton("Proximamente");
     private final JButton btnJuego4          = new JButton("Proximamente");
+    private final JButton btnLogout          = new JButton("Cerrar sesión");
+    private final JButton btnHistorial       = new JButton("Historial");
     private final JDialog proximamente       = new JDialog();
     private final JLabel lblProximamente     = new JLabel("Juego en construcción");
     private final JButton closeButtonProx = new JButton("Cerrar");
@@ -31,10 +33,12 @@ public class Menu {
 
     public void setbounds(){
         titulo.setBounds(400,100, 300, 25);
-        btnRuleta.setBounds(300, 300, 150, 30);
-        btnTragamonedas.setBounds(500, 300, 150, 30);
-        btnJuego3.setBounds(300, 500, 150,30);
-        btnJuego4.setBounds(500,500,150,30);
+        btnRuleta.setBounds(100, 200, 150, 30);
+        btnTragamonedas.setBounds(300, 200, 150, 30);
+        btnJuego3.setBounds(100, 400, 150,30);
+        btnJuego4.setBounds(300,400,150,30);
+        btnLogout.setBounds(100,500,200,20);
+        btnHistorial.setBounds(300,500,200,20);
         lblProximamente.setBounds(200,100,200,50);
         closeButtonProx.setBounds(100,100 ,200,20);
     }
@@ -54,6 +58,8 @@ public class Menu {
         btnTragamonedas.addActionListener(e -> mostrarProximamente());
         btnJuego3.addActionListener(e -> mostrarProximamente());
         btnJuego4.addActionListener(e -> mostrarProximamente());
+        btnHistorial.addActionListener(e-> abrirHistorial());
+        btnLogout.addActionListener(e -> cerrarSesion());
         closeButtonProx.addActionListener(e -> proximamente.dispose());
     }
 
@@ -66,8 +72,18 @@ public class Menu {
         menu.mostrarVentana();
     }
 
+    public void cerrarSesion(){
+        frame.dispose();
+        VentanaLogin ventana = new VentanaLogin();
+        ventana.mostrarVentana();
+    }
+
+    public void abrirHistorial(){
+
+    }
+
     public void goRuleta(){
-        Ruleta.main(new String[]{});
+        VentanaRuleta.main(new String[]{});
     }
 
     public void mostrarProximamente(){
