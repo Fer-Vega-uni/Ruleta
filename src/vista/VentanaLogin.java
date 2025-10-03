@@ -11,9 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class VentanaLogin {
-    public final ArrayList<Usuario> USUARIOS = new ArrayList<>();
 
-    //UI
     private final JFrame frame            = new JFrame("Login - \uD83C\uDFB0Casino black cat\uD83D\uDC08\u200D⬛");
     private final JLabel titulo           = new JLabel("Inicio de sesión");
     private final JLabel lbUsuario        = new JLabel("Ingrese su usuario:");

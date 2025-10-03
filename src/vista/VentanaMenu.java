@@ -39,7 +39,6 @@ public class VentanaMenu {
         agregarComponentesAlFrame();
         configurarListeners();
         actualizarInfoUsuario();
-        frame.setVisible(true);
     }
 
     private void configurarFrame() {
@@ -70,7 +69,6 @@ public class VentanaMenu {
     }
 
     private void agregarComponentesAlFrame(){
-        // ¡CORRECCIÓN! Se añaden los nuevos JLabels al frame.
         frame.add(lblBienvenida);
         frame.add(lblSaldo);
         frame.add(titulo);
@@ -123,5 +121,7 @@ public class VentanaMenu {
     private void mostrarProximamente(){
         proximamente.setVisible(true);
     }
+
+    public void mostrarVentana() {frame.setVisible(true);}
 
 }

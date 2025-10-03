@@ -12,11 +12,10 @@ public class ControladorRuleta {
         this.modeloRuleta = modeloRuleta;
     }
 
-    public Resultado realizarApuesta(int monto, String tipoApuestaStr, Usuario jugador){
+    public Resultado realizarApuesta(int monto, TipoApuesta tipo, Usuario jugador) {
         if (monto > jugador.getSaldo()) {
             throw new IllegalStateException("Saldo insuficiente para realizar la apuesta.");
         }
-        TipoApuesta tipo = TipoApuesta.valueOf(tipoApuestaStr.toUpperCase());
         Resultado resultado = modeloRuleta.jugarRonda(monto, tipo);
         jugador.actualizarSaldo(resultado.getGanancia());
         return resultado;

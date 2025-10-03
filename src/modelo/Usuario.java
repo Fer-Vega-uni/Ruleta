@@ -12,7 +12,7 @@ public class Usuario {
 
     public Usuario(String nombre, String password, String user) {
         this.id = ++contador;
-        this.setNombre(nombre);
+        setNombre(nombre);
         this.password = password;
         this.user = user;
         this.saldo = 5000;

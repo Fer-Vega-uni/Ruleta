@@ -12,15 +12,12 @@ public class ControladorSesion {
         this.usuariosRegistrados = new ArrayList<>();
         usuariosRegistrados.add(new Usuario("Don Donnie","123","ownerrrr"));}
 
-    public void registrarUsuario(String u, String p, String n) {
-        if (u==null||u.isBlank()||p==null||p.isBlank()
-        ||n==null||n.isBlank()) throw new IllegalArgumentException("Datos requeridos");
-        for (Usuario user : usuariosRegistrados) {
-            if (user.getUsername().equalsIgnoreCase(u)) {
-                throw new IllegalArgumentException("El nombre de usuario ya existe.");
-            }
-        usuariosRegistrados.add(new Usuario(n,p,u));
-    }}
+    public void registrarUsuario(String nombre, String password, String user) {
+        if (nombre == null || nombre.isBlank() || password == null || password.isBlank() || user == null || user.isBlank()) {throw new IllegalArgumentException("Todos los campos son requeridos.");}
+        for (Usuario u : usuariosRegistrados) {
+            if (u.getUsername().equalsIgnoreCase(user)) {throw new IllegalArgumentException("El nombre de usuario ya existe.");}}
+        usuariosRegistrados.add(new Usuario(nombre, password, user));
+    }
 
     public boolean iniciarSesion(String u, String p){
         for (Usuario user : usuariosRegistrados) {
@@ -37,5 +34,5 @@ public class ControladorSesion {
 
     public Usuario getUsuarioActual(){return usuarioActual;}
 
-    public void cerrarSession(){usuarioActual=null;}
+    public void cerrarSesion(){usuarioActual=null;}
 }
