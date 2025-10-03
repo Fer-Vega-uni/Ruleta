@@ -1,55 +1,48 @@
 package modelo;
 
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
-import javax.swing.*;
 
 public class Ruleta {
-    public static final int MAX_HISTORIAL = 100;
-    public static final int[] historialNumeros = new int[MAX_HISTORIAL];
-    public static int[] historialApuestas = new int[MAX_HISTORIAL];
-    public static boolean[] historialAciertos = new boolean[MAX_HISTORIAL];
-    public static int historialSize = 0;
-    public static Random rng = new Random();
-    public static int[] numerosRojos = {1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36};
+    private final Random rng = new Random();
+    private final List<Resultado> historialResultados;
+    private static final int[] numerosRojos = {1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36};
 
 
-
-    public void iniciarRonda(int apuesta, TipoApuesta tipoSeleccionado) {
-        if (apuesta <= 0) return;
-        assert tipoSeleccionado != null;
-        int numero = girarRuleta();
-        boolean acierto = TipoApuesta.evaluarResultado(numero, tipoSeleccionado);
-        registrarResultado(numero, apuesta, acierto);
-        historialSize++;
-
+    public Ruleta() {
+        this.historialResultados = new ArrayList<>();
     }
 
-
-    public static int girarRuleta() {
-        return rng.nextInt(36) + 1;
+    private int girarRuleta() {
+        return rng.nextInt(37); // Números del 0 al 36
     }
 
-
-
-
-    public static void registrarResultado(int numero, int apuesta, boolean acierto) {
-        if (historialSize < MAX_HISTORIAL) {
-            historialNumeros[historialSize] = numero;
-            historialAciertos[historialSize] = acierto;
-            if (acierto) {
-                historialApuestas[historialSize] = apuesta * 2;
-            } else {
-                historialApuestas[historialSize] = -apuesta;
+    public static boolean esRojo(int n) {
+        for (int num : numerosRojos) {
+            if (num == n) {
+                return true;
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Historial máximo alcanzado");
         }
+        return false;
     }
 
+    public Resultado jugarRonda(int montoApostado, TipoApuesta tipoSeleccionado) {
+        if (montoApostado <= 0) {
+            throw new IllegalArgumentException("La apuesta debe ser mayor a cero.");
+        }
 
+        int numeroGanador = girarRuleta();
+        boolean acierto = tipoSeleccionado.evaluarResultado(numeroGanador, tipoSeleccionado);
+        int ganancia = acierto ? montoApostado : -montoApostado;
 
+        Resultado resultado = new Resultado(numeroGanador, tipoSeleccionado, montoApostado, ganancia);
+        historialResultados.add(resultado);
 
+        return resultado;
+    }
 
-
+    public List<Resultado> getHistorialResultados() {
+        return historialResultados;
+    }
 }

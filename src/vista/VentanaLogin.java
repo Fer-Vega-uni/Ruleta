@@ -2,14 +2,16 @@ package vista;
 
 
 import controladores.ControladorSesion;
+import controladores.ControladorRuleta;
 import modelo.Usuario;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class VentanaLogin {
-    public static final ArrayList<Usuario> USUARIOS = new ArrayList<>();
+    public final ArrayList<Usuario> USUARIOS = new ArrayList<>();
 
     //UI
     private final JFrame frame            = new JFrame("Login - \uD83C\uDFB0Casino black cat\uD83D\uDC08\u200D⬛");
@@ -22,25 +24,54 @@ public class VentanaLogin {
     private JLabel result                 = new JLabel("");
     private final JLabel lbRegister       = new JLabel("¿No tienes cuenta?");
     private final JButton btnRegister     = new JButton("Registrate aquí");
+
+    private final ControladorSesion controladorSesion;
+    private final ControladorRuleta controladorRuleta;
     //armando, se vienen cositas....
 
 
     //menti, se alejan cositas
-    public VentanaLogin() {
+    public VentanaLogin(ControladorSesion cs, ControladorRuleta rc) {
+        this.controladorSesion = cs;
+        this.controladorRuleta = rc;
+        inicializarComponentes();
+        configurarListeners();
+    }
+
+    private void inicializarComponentes(){
         setFrame();
         setBounds();
         setOnFrame();
-        login();
-        register();
         mostrarVentana();
     }
 
-    private static void run() {
-        VentanaLogin ventana = new VentanaLogin();
-        ventana.mostrarVentana();
+    private void configurarListeners() {
+        btnIngresar.addActionListener(this::intentarLogin);
+        btnRegister.addActionListener(e -> abrirVentanaRegistro());
     }
 
-    public void setFrame() {
+    private void intentarLogin(ActionEvent e) {
+        String user = txtUsuario.getText();
+        String password = new String(txtClave.getPassword());
+        boolean loginExitoso = controladorSesion.iniciarSesion(user, password);
+
+        if (loginExitoso) {
+            JOptionPane.showMessageDialog(frame, "¡Bienvenido!");
+            frame.dispose();
+            VentanaMenu menu = new VentanaMenu(controladorSesion, controladorRuleta);
+            menu.mostrarVentana();
+        } else {
+            JOptionPane.showMessageDialog(frame, "Usuario o contraseña incorrectos.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void abrirVentanaRegistro() {
+        VentanaRegistro vr = new VentanaRegistro(controladorSesion, frame); // Le pasamos el controlador
+        vr.mostrarVentana();
+    }
+
+
+        public void setFrame() {
         frame.setSize(800, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(null);
@@ -70,22 +101,7 @@ public class VentanaLogin {
     }
 
 
-    public void mostrarVentana(){
-        frame.setVisible(true);
-    }
-
-    private void login(){
-        ControladorSesion.iniciarSesion(txtUsuario.getText(), Arrays.toString(txtClave.getPassword()));
-    }
-
-
-    private void register(){
-        btnRegister.addActionListener(e -> {
-           });
-    }
-
-
-
+    public void mostrarVentana(){frame.setVisible(true);}
 }
 
 

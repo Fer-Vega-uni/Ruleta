@@ -1,8 +1,8 @@
 package vista;
 
-import controladores.ControladorSesion;
-import modelo.Usuario;
 
+import controladores.ControladorSesion;
+import java.awt.event.ActionEvent;
 import javax.swing.*;
 
 public class VentanaRegistro {
@@ -18,6 +18,8 @@ public class VentanaRegistro {
     private final JButton btnRegister     = new JButton("Registro");
     private final JButton btnVolver       = new JButton("VOLVER");
     private final JLabel result                 = new JLabel("");
+
+    private final ControladorSesion controladorSesion;
 
     public void setFrame() {
         frame.setSize(600, 400);
@@ -52,40 +54,54 @@ public class VentanaRegistro {
         frame.add(result);
     }
 
-    private static void run() {
-        VentanaRegistro ventana = new VentanaRegistro();
-        ventana.mostrarVentana();
-    }
 
-    public void mostrarVentana(){
+    private void mostrarVentana(){
         frame.setVisible(true);
     }
 
-    public VentanaRegistro() {
+    public VentanaRegistro(ControladorSesion cs, JFrame ventanaPadre) {
+        this.controladorSesion = cs;
+        inicializarComponentes();
+        agregarListeners();
+    }
+
+    private void inicializarComponentes(){
         setFrame();
         setBounds();
         setOnFrame();
-        volver();
         mostrarVentana();
     }
 
-
-    public void volver(){
-        btnVolver.addActionListener(e -> {timerVolver(300);});
+    private void agregarListeners(){
+        btnRegister.addActionListener(this::intentarRegistro);
+        btnVolver.addActionListener(e -> frame.dispose());
     }
 
-    public void registar(){
-        btnRegister.addActionListener(e -> ControladorSesion.);
+    private void intentarRegistro(ActionEvent e) {
+        try {
+            controladorSesion.registrarUsuario(
+                    txtNombre.getText(),
+                    new String(txtClave.getPassword()),
+                    txtUsuario.getText()
+            );
+            JOptionPane.showMessageDialog(frame, "Usuario registrado con éxito.", "Registro Completo", JOptionPane.INFORMATION_MESSAGE);
+            frame.dispose();
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(frame, ex.getMessage(), "Error de Registro", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
-    public void timerVolver(int delay){
-        Timer timer = new Timer(delay, evt -> {
+
+    private void volver(){
+        btnVolver.addActionListener(e -> {timerVolver();});
+    }
+
+    private void timerVolver(){
+        Timer timer = new Timer(300, evt -> {
             frame.dispose();
         });
         timer.setRepeats(false);
         timer.start();
     }
-
-
 
 }
