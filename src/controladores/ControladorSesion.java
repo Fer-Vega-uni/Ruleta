@@ -2,11 +2,14 @@ package controladores;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import modelo.Resultado;
 import modelo.Usuario;
 
 public class ControladorSesion {
     private final List<Usuario> usuariosRegistrados;
     private Usuario usuarioActual;
+
 
     public ControladorSesion() {
         this.usuariosRegistrados = new ArrayList<>();

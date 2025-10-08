@@ -1,5 +1,8 @@
 package modelo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Usuario {
     private static int contador = 0;
     private int id;
@@ -7,6 +10,7 @@ public class Usuario {
     private String password;
     private String user;
     private int saldo=5000;
+    private final List<Resultado> historial = new ArrayList<>();
 
 
 
@@ -40,10 +44,14 @@ public class Usuario {
         }
         this.nombre = nombre;}
 
+    public void agregarResultado(Resultado resultado){historial.add(resultado);}
+
     public String getUsername() {return user;}
     public void setUser(String user) {this.user = user;}
 
     public int getSaldo() {return saldo;}
     public void setSaldo(int saldo) {this.saldo = saldo;}
+
+    public List<Resultado> getHistorial(){ return this.historial;}
 }
 

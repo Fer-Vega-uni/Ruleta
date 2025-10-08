@@ -1,5 +1,6 @@
 package vista;
 
+import controladores.ControladorResultado;
 import controladores.ControladorRuleta;
 import controladores.ControladorSesion;
 import modelo.Usuario;
@@ -115,7 +116,10 @@ public class VentanaMenu {
     }
 
     private void abrirHistorial(){
-        JOptionPane.showMessageDialog(frame, "Función de historial no implementada aún.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+        ControladorResultado cr = new ControladorResultado(controladorSesion);
+        VentanaHistorial vh = new VentanaHistorial(cr, controladorSesion, controladorRuleta);
+        vh.mostrarVentana();
+        frame.dispose();
     }
 
     private void mostrarProximamente(){

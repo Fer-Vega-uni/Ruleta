@@ -9,7 +9,7 @@ public class Launcher {
     public static void main(String[] args) {
         ControladorSesion controladorSesion = new ControladorSesion();
         Ruleta modeloRuleta = new Ruleta();
-        ControladorRuleta controladorRuleta = new ControladorRuleta(modeloRuleta);
+        ControladorRuleta controladorRuleta = new ControladorRuleta(modeloRuleta, controladorSesion);
         VentanaLogin ventanaLogin = new VentanaLogin(controladorSesion, controladorRuleta);
         ventanaLogin.mostrarVentana();
     }

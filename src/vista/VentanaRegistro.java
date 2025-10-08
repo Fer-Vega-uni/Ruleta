@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class VentanaRegistro {
-    // --- Componentes de la UI ---
+
     private final JFrame frame = new JFrame("Registro - \uD83C\uDFB0Casino black cat\uD83D\uDC08\u200D⬛");
     private final JLabel titulo = new JLabel("Registro de Usuario");
     private final JLabel lbNombre = new JLabel("Nombre completo:");
@@ -18,20 +18,15 @@ public class VentanaRegistro {
     private final JButton btnRegister = new JButton("Registrarme");
     private final JButton btnVolver = new JButton("Volver");
 
-    // --- Controlador ---
     private final ControladorSesion controladorSesion;
 
-    // --- Constructor ---
-    // ¡ESTA ES LA PARTE CLAVE! Este constructor coincide con la llamada desde VentanaLogin.
     public VentanaRegistro(ControladorSesion cs, JFrame ventanaPadre) {
         this.controladorSesion = cs;
-        frame.setLocationRelativeTo(ventanaPadre); // Centra esta ventana sobre la de Login
-
+        frame.setLocationRelativeTo(ventanaPadre);
         inicializarComponentes();
         configurarListeners();
     }
 
-    // --- Métodos de Configuración ---
     private void inicializarComponentes() {
         configurarFrame();
         posicionarComponentes();
@@ -40,7 +35,7 @@ public class VentanaRegistro {
 
     private void configurarFrame() {
         frame.setSize(400, 450);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // DISPOSE_ON_CLOSE para no cerrar toda la app
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLayout(null);
     }
 
@@ -74,23 +69,19 @@ public class VentanaRegistro {
 
     private void configurarListeners() {
         btnRegister.addActionListener(this::intentarRegistro);
-        // El botón volver simplemente cierra esta ventana de registro.
         btnVolver.addActionListener(e -> frame.dispose());
     }
 
-    // --- Métodos de Acción ---
     private void intentarRegistro(ActionEvent e) {
         try {
-            // Llama al controlador para registrar al usuario
             controladorSesion.registrarUsuario(
                     txtNombre.getText(),
                     new String(txtClave.getPassword()),
                     txtUsuario.getText()
             );
             JOptionPane.showMessageDialog(frame, "¡Usuario registrado con éxito!", "Registro Completo", JOptionPane.INFORMATION_MESSAGE);
-            frame.dispose(); // Cierra la ventana de registro si fue exitoso
+            frame.dispose();
         } catch (IllegalArgumentException ex) {
-            // Si el controlador lanza un error (ej: usuario ya existe), se muestra aquí.
             JOptionPane.showMessageDialog(frame, ex.getMessage(), "Error de Registro", JOptionPane.ERROR_MESSAGE);
         }
     }

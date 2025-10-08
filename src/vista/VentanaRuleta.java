@@ -91,7 +91,7 @@ public class VentanaRuleta {
         try {
             int monto = Integer.parseInt(txtMontoApuesta.getText());
             TipoApuesta tipoSeleccionado = (TipoApuesta) cmbTipoApuesta.getSelectedItem();
-            Resultado resultado = controladorRuleta.realizarApuesta(monto, tipoSeleccionado, jugador);
+            Resultado resultado = controladorRuleta.realizarApuesta(monto, tipoSeleccionado);
             lblResultado.setText(resultado.toString());
             actualizarSaldoLabel();
 

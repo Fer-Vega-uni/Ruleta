@@ -3,12 +3,10 @@ package vista;
 
 import controladores.ControladorSesion;
 import controladores.ControladorRuleta;
-import modelo.Usuario;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-import java.util.Arrays;
+
 
 public class VentanaLogin {
 
@@ -69,7 +67,7 @@ public class VentanaLogin {
     }
 
 
-        public void setFrame() {
+    public void setFrame() {
         frame.setSize(800, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(null);
