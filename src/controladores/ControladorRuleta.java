@@ -1,8 +1,5 @@
 package controladores;
-import modelo.Resultado;
-import modelo.Ruleta;
-import modelo.TipoApuesta;
-import modelo.Usuario;
+import modelo.*;
 
 public class ControladorRuleta {
     private final Ruleta modeloRuleta;
@@ -14,12 +11,30 @@ public class ControladorRuleta {
         this.controladorSesion = cs;
     }
 
-    public Resultado realizarApuesta(int monto, TipoApuesta tipo) {
+    public Resultado realizarApuesta(int monto, String tipo) {
         Usuario jugador = controladorSesion.getUsuarioActual();
         if (monto > jugador.getSaldo()) {
             throw new IllegalStateException("Saldo insuficiente para realizar la apuesta.");
         }
-        Resultado resultado = modeloRuleta.jugarRonda(monto, tipo);
+        ApuestaBase apuesta;
+        switch (tipo) {
+            case "ROJO":
+                apuesta = new ApuestaRojo(monto);
+                break;
+            case "NEGRO":
+                apuesta = new ApuestaNegro(monto);
+                break;
+            case "PAR":
+                apuesta = new ApuestaPar(monto);
+                break;
+            case "IMPAR":
+                apuesta = new ApuestaImpar(monto);
+                break;
+            default:
+                throw new IllegalStateException("Valor inesperado: " + tipo);
+        }
+
+        Resultado resultado = modeloRuleta.jugarRonda(apuesta);
         jugador.actualizarSaldo(resultado.getGanancia());
         jugador.agregarResultado(resultado);
         return resultado;

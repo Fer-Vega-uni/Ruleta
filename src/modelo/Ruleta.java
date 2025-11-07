@@ -18,29 +18,30 @@ public class Ruleta {
         return rng.nextInt(37); // Números del 0 al 36
     }
 
-    public static boolean esRojo(int n) {
+    private String determinarColor(int numero) {
         for (int num : numerosRojos) {
-            if (num == n) {
-                return true;
+            if (num == numero) {
+                return "ROJO";
             }
         }
-        return false;
+        return "NEGRO";
     }
 
-    public Resultado jugarRonda(int montoApostado, TipoApuesta tipoSeleccionado) {
-        if (montoApostado <= 0) {
+    public Resultado jugarRonda(ApuestaBase apuesta) {
+        if (apuesta.getMonto() <= 0) {
             throw new IllegalArgumentException("La apuesta debe ser mayor a cero.");
         }
 
         int numeroGanador = girarRuleta();
-        boolean acierto = tipoSeleccionado.evaluarResultado(numeroGanador, tipoSeleccionado);
-        int ganancia = acierto ? montoApostado : -montoApostado;
+        String colorGanador = determinarColor(numeroGanador);
+        boolean acierto = apuesta.acierto(numeroGanador,colorGanador);
+        int ganancia = acierto ? apuesta.getMonto() : -apuesta.getMonto();
 
-        Resultado resultado = new Resultado(numeroGanador, tipoSeleccionado, montoApostado, ganancia);
+        Resultado resultado = new Resultado(numeroGanador, apuesta.getTipo(), apuesta.getMonto(), ganancia);
         historialResultados.add(resultado);
-
         return resultado;
     }
+
 
     public List<Resultado> getHistorialResultados() {
         return historialResultados;

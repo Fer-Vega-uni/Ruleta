@@ -114,7 +114,7 @@ public class VentanaMenu {
         VentanaLogin login = new VentanaLogin(controladorSesion, controladorRuleta);
         login.mostrarVentana();
     }
-
+ 
     private void abrirHistorial(){
         ControladorResultado cr = new ControladorResultado(controladorSesion);
         VentanaHistorial vh = new VentanaHistorial(cr, controladorSesion, controladorRuleta);

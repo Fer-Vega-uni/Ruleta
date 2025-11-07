@@ -3,7 +3,6 @@ package vista;
 import controladores.ControladorRuleta;
 import controladores.ControladorSesion;
 import modelo.Resultado;
-import modelo.TipoApuesta;
 import modelo.Usuario;
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +13,7 @@ public class VentanaRuleta {
     private final JButton btnVolver = new JButton("Volver");
     private final JButton btnComenzar = new JButton("Jugar");
     private final JLabel lblTipoApuesta = new JLabel("Tipo de apuesta:");
-    private final JComboBox<TipoApuesta> cmbTipoApuesta = new JComboBox<>(TipoApuesta.values());
+    private final JComboBox<String> cmbTipoApuesta = new JComboBox<String>(new String[]{"ROJO", "NEGRO", "PAR", "IMPAR"});
     private final JLabel lblMontoApuesta = new JLabel("Monto a apostar:");
     private final JTextField txtMontoApuesta = new JTextField();
     private final JLabel lblResultado = new JLabel("¡Haga su apuesta!", SwingConstants.CENTER);
@@ -90,7 +89,7 @@ public class VentanaRuleta {
         Usuario jugador = controladorSesion.getUsuarioActual();
         try {
             int monto = Integer.parseInt(txtMontoApuesta.getText());
-            TipoApuesta tipoSeleccionado = (TipoApuesta) cmbTipoApuesta.getSelectedItem();
+            String tipoSeleccionado = (String) cmbTipoApuesta.getSelectedItem();
             Resultado resultado = controladorRuleta.realizarApuesta(monto, tipoSeleccionado);
             lblResultado.setText(resultado.toString());
             actualizarSaldoLabel();

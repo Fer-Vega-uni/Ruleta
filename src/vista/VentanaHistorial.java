@@ -72,7 +72,7 @@ public class VentanaHistorial {
             for (Resultado r : historial) {
                 sb.append(String.format("%-10d | %-10s | %-10d | %-10d\n",
                         r.getNumeroObtenido(),
-                        r.getTipoApuesta().name(),
+                        r.getTipoApuesta(),
                         r.getMontoApostado(),
                         r.getGanancia()));
             }
