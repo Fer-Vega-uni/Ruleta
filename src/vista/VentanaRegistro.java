@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 
 public class VentanaRegistro {
 
-    private final JFrame frame = new JFrame("Registro - \uD83C\uDFB0Casino black cat\uD83D\uDC08\u200D⬛");
+    private final JFrame frame = new JFrame("Registro - 🎰Casino black cat🐈‍⬛");
     private final JLabel titulo = new JLabel("Registro de Usuario");
     private final JLabel lbNombre = new JLabel("Nombre completo:");
     private final JTextField txtNombre = new JTextField();

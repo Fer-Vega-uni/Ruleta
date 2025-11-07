@@ -39,4 +39,5 @@ public class ControladorRuleta {
         jugador.agregarResultado(resultado);
         return resultado;
     }
+
 }

@@ -9,7 +9,7 @@ import java.awt.*;
 import java.util.List;
 
 public class VentanaHistorial {
-    private final JFrame frame = new JFrame("Historial - \uD83C\uDFB0Casino black cat\uD83D\uDC08\u200D⬛");
+    private final JFrame frame = new JFrame("Historial - 🎰Casino black cat🐈‍⬛");
     private final JLabel titulo = new JLabel("Historial de Partidas", SwingConstants.CENTER);
     private final JButton btnVolver = new JButton("Volver");
 

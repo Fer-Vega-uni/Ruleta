@@ -28,4 +28,16 @@ public class Resultado {
     public int getNumeroObtenido() {return numeroObtenido;}
 
     public String getTipoApuesta() {return tipoApuesta;}
+
+	/**
+	 * 
+	 * @param numeroObtenido
+	 * @param tipoApuesta
+	 * @param montoApostado
+	 * @param ganancia
+	 */
+	public Resultado(int numeroObtenido, modelo.TipoApuesta tipoApuesta, int montoApostado, int ganancia) {
+		// TODO - implement Resultado.Resultado
+		throw new UnsupportedOperationException();
+	}
 }

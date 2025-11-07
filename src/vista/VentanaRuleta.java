@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class VentanaRuleta {
-    private final JFrame frame = new JFrame("Ruleta - \uD83C\uDFB0Casino black cat\uD83D\uDC08\u200D⬛");
+    private final JFrame frame = new JFrame("Ruleta - 🎰Casino black cat🐈‍⬛");
     private final JLabel titulo = new JLabel("Ruleta", SwingConstants.CENTER);
     private final JButton btnVolver = new JButton("Volver");
     private final JButton btnComenzar = new JButton("Jugar");

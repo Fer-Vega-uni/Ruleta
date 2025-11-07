@@ -13,7 +13,7 @@ public class VentanaMenu {
     private final ControladorRuleta controladorRuleta;
 
 
-    private final JFrame frame            = new JFrame("Inicio - \uD83C\uDFB0Casino black cat\uD83D\uDC08\u200D⬛");
+    private final JFrame frame            = new JFrame("Inicio - 🎰Casino black cat🐈‍⬛");
     private final JLabel titulo           = new JLabel("Aquí puedes escoger a qué juego ir");
     private final JLabel lblBienvenida    = new JLabel();
     private final JLabel lblSaldo         = new JLabel();

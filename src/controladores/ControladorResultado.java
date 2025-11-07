@@ -4,12 +4,12 @@ import modelo.Resultado;
 import modelo.Usuario;
 
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.*;
 
 public class ControladorResultado {
-    private ArrayList<Resultado> historial;
-    private final ControladorSesion session;
+	private java.util.ArrayList<modelo.Resultado> historial;
+	private final controladores.ControladorSesion session;
 
     public ControladorResultado(ControladorSesion session) {
         this.session = session;

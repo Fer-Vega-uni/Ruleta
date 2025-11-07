@@ -6,12 +6,12 @@ import java.util.Random;
 
 public class Ruleta {
     private final Random rng = new Random();
-    private final List<Resultado> historialResultados;
+    private final IRepositorioResultados repositorio;
     private static final int[] numerosRojos = {1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36};
 
 
-    public Ruleta() {
-        this.historialResultados = new ArrayList<>();
+    public Ruleta(IRepositorioResultados repositorio) {
+        this.repositorio = repositorio;
     }
 
     private int girarRuleta() {
@@ -38,12 +38,11 @@ public class Ruleta {
         int ganancia = acierto ? apuesta.getMonto() : -apuesta.getMonto();
 
         Resultado resultado = new Resultado(numeroGanador, apuesta.getTipo(), apuesta.getMonto(), ganancia);
-        historialResultados.add(resultado);
+        this.repositorio.guardar(resultado);
         return resultado;
     }
 
 
-    public List<Resultado> getHistorialResultados() {
-        return historialResultados;
-    }
+
+
 }
