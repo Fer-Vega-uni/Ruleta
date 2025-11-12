@@ -1,5 +1,6 @@
 package vista;
 
+import controladores.ControladorEstadisticas;
 import controladores.ControladorResultado;
 import controladores.ControladorRuleta;
 import controladores.ControladorSesion;
@@ -19,11 +20,13 @@ public class VentanaHistorial {
     private final ControladorResultado controladorResultado;
     private final ControladorSesion controladorSesion;
     private final ControladorRuleta controladorRuleta;
+    private final ControladorEstadisticas controladorEstadisticas;
 
-    public VentanaHistorial(ControladorResultado cr, ControladorSesion controladorSesion, ControladorRuleta controladorRuleta) {
+    public VentanaHistorial(ControladorResultado cr, ControladorSesion controladorSesion, ControladorRuleta controladorRuleta, ControladorEstadisticas ce) {
         this.controladorResultado = cr;
         this.controladorSesion = controladorSesion;
         this.controladorRuleta = controladorRuleta;
+        this.controladorEstadisticas = ce;
         inicializarVentana();
         cargarHistorial();
     }
@@ -55,7 +58,7 @@ public class VentanaHistorial {
     private void configurarListeners(){
         btnVolver.addActionListener(e -> {
             frame.dispose();
-            VentanaMenu menu = new VentanaMenu(controladorSesion, controladorRuleta);
+            VentanaMenu menu = new VentanaMenu(controladorSesion, controladorRuleta, controladorEstadisticas);
             menu.mostrarVentana();
         });
     }

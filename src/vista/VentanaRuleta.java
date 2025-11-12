@@ -1,5 +1,6 @@
 package vista;
 
+import controladores.ControladorEstadisticas;
 import controladores.ControladorRuleta;
 import controladores.ControladorSesion;
 import modelo.Resultado;
@@ -21,10 +22,12 @@ public class VentanaRuleta {
 
     private final ControladorSesion controladorSesion;
     private final ControladorRuleta controladorRuleta;
+    private final ControladorEstadisticas controladorEstadisticas;
 
-    public VentanaRuleta(ControladorSesion cs, ControladorRuleta rc) {
+    public VentanaRuleta(ControladorSesion cs, ControladorRuleta rc, ControladorEstadisticas controladorEstadisticas) {
         this.controladorSesion = cs;
         this.controladorRuleta = rc;
+        this.controladorEstadisticas = controladorEstadisticas;
         inicializarVentana();
     }
 
@@ -107,7 +110,7 @@ public class VentanaRuleta {
 
     private void volverAlMenu() {
         frame.dispose();
-        VentanaMenu menu = new VentanaMenu(controladorSesion, controladorRuleta);
+        VentanaMenu menu = new VentanaMenu(controladorSesion, controladorRuleta, controladorEstadisticas);
         menu.mostrarVentana();
     }
 

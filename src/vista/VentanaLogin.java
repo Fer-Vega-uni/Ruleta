@@ -1,6 +1,7 @@
 package vista;
 
 
+import controladores.ControladorEstadisticas;
 import controladores.ControladorSesion;
 import controladores.ControladorRuleta;
 
@@ -23,13 +24,15 @@ public class VentanaLogin {
 
     private final ControladorSesion controladorSesion;
     private final ControladorRuleta controladorRuleta;
+    private final ControladorEstadisticas controladorEstadisticas;
     //armando, se vienen cositas....
 
 
     //menti, se alejan cositas
-    public VentanaLogin(ControladorSesion cs, ControladorRuleta rc) {
+    public VentanaLogin(ControladorSesion cs, ControladorRuleta rc, ControladorEstadisticas ce) {
         this.controladorSesion = cs;
         this.controladorRuleta = rc;
+        this.controladorEstadisticas = ce;
         inicializarComponentes();
         configurarListeners();
     }
@@ -54,7 +57,7 @@ public class VentanaLogin {
         if (loginExitoso) {
             JOptionPane.showMessageDialog(frame, "¡Bienvenido!");
             frame.dispose();
-            VentanaMenu menu = new VentanaMenu(controladorSesion, controladorRuleta);
+            VentanaMenu menu = new VentanaMenu(controladorSesion, controladorRuleta, controladorEstadisticas);
             menu.mostrarVentana();
         } else {
             JOptionPane.showMessageDialog(frame, "Usuario o contraseña incorrectos.", "Error", JOptionPane.ERROR_MESSAGE);

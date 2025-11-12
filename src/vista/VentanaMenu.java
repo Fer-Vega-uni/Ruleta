@@ -1,5 +1,6 @@
 package vista;
 
+import controladores.ControladorEstadisticas;
 import controladores.ControladorResultado;
 import controladores.ControladorRuleta;
 import controladores.ControladorSesion;
@@ -11,6 +12,7 @@ public class VentanaMenu {
 
     private final ControladorSesion controladorSesion;
     private final ControladorRuleta controladorRuleta;
+    private final ControladorEstadisticas controladorEstadisticas;
 
 
     private final JFrame frame            = new JFrame("Inicio - 🎰Casino black cat🐈‍⬛");
@@ -23,14 +25,16 @@ public class VentanaMenu {
     private final JButton btnJuego4          = new JButton("Próximamente");
     private final JButton btnLogout          = new JButton("Cerrar sesión");
     private final JButton btnHistorial       = new JButton("Historial");
+    private final JButton btnEStadisticas    = new JButton("Estadísticas");
 
     private final JDialog proximamente       = new JDialog(frame, "Aviso", true); // Es mejor hacerlo modal
     private final JLabel lblProximamente     = new JLabel("Juego en construcción", SwingConstants.CENTER);
     private final JButton closeButtonProx = new JButton("Cerrar");
 
-    public VentanaMenu(ControladorSesion cs, ControladorRuleta rc) {
+    public VentanaMenu(ControladorSesion cs, ControladorRuleta rc, ControladorEstadisticas ce) {
         this.controladorSesion = cs;
         this.controladorRuleta = rc;
+        this.controladorEstadisticas=ce;
         inicializarVentana();
     }
 
@@ -65,8 +69,9 @@ public class VentanaMenu {
         btnTragamonedas.setBounds(450, 200, 200, 50);
         btnJuego3.setBounds(150, 300, 200, 50);
         btnJuego4.setBounds(450, 300, 200, 50);
-        btnHistorial.setBounds(150, 450, 200, 40);
+        btnHistorial.setBounds(50, 450, 200, 40);
         btnLogout.setBounds(450, 450, 200, 40);
+        btnEStadisticas.setBounds(250,450,200,40);
     }
 
     private void agregarComponentesAlFrame(){
@@ -79,6 +84,7 @@ public class VentanaMenu {
         frame.add(btnJuego4);
         frame.add(btnHistorial);
         frame.add(btnLogout);
+        frame.add(btnEStadisticas);
 
         proximamente.add(lblProximamente, BorderLayout.CENTER);
         proximamente.add(closeButtonProx, BorderLayout.SOUTH);
@@ -91,6 +97,7 @@ public class VentanaMenu {
         btnJuego4.addActionListener(e -> mostrarProximamente());
         btnHistorial.addActionListener(e-> abrirHistorial());
         btnLogout.addActionListener(e -> cerrarSesion());
+        btnEStadisticas.addActionListener(e -> abrirEstadisticas());
         closeButtonProx.addActionListener(e -> proximamente.dispose());
     }
 
@@ -104,22 +111,28 @@ public class VentanaMenu {
 
     private void abrirRuleta() {
         frame.dispose();
-        VentanaRuleta vr = new VentanaRuleta(controladorSesion, controladorRuleta);
+        VentanaRuleta vr = new VentanaRuleta(controladorSesion, controladorRuleta, controladorEstadisticas);
         vr.mostrarVentana();
     }
 
     private void cerrarSesion() {
         controladorSesion.cerrarSesion();
         frame.dispose();
-        VentanaLogin login = new VentanaLogin(controladorSesion, controladorRuleta);
+        VentanaLogin login = new VentanaLogin(controladorSesion, controladorRuleta, controladorEstadisticas);
         login.mostrarVentana();
     }
  
     private void abrirHistorial(){
         ControladorResultado cr = new ControladorResultado(controladorSesion);
-        VentanaHistorial vh = new VentanaHistorial(cr, controladorSesion, controladorRuleta);
+        VentanaHistorial vh = new VentanaHistorial(cr, controladorSesion, controladorRuleta, controladorEstadisticas);
         vh.mostrarVentana();
         frame.dispose();
+    }
+
+    private void abrirEstadisticas() {
+        frame.dispose();
+        VentanaEstadisticas ve = new VentanaEstadisticas(controladorEstadisticas, controladorSesion, controladorRuleta);
+        ve.mostrarVentana();
     }
 
     private void mostrarProximamente(){
