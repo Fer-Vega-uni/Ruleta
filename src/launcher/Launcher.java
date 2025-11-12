@@ -18,4 +18,5 @@ public class Launcher {
         VentanaLogin ventanaLogin = new VentanaLogin(controladorSesion, controladorRuleta, controladorEstadisticas);
         ventanaLogin.mostrarVentana();
     }
+
 }
