@@ -34,6 +34,15 @@ public class Usuario {
         {throw new IllegalArgumentException("El monto a depositar debe ser positivo.");}
     }
 
+    public void pagarApuesta(int monto) {
+        if (monto > this.saldo) {
+            // AQUÍ ESTÁ EL CAMBIO CLAVE:
+            // Usamos IllegalStateException para decir "El estado (saldo) del objeto no permite esto"
+            throw new IllegalStateException("Saldo insuficiente. Tienes $" + this.saldo + " y quieres apostar $" + monto);
+        }
+        this.saldo -= monto;
+    }
+
     public void actualizarSaldo(int montoGanadoOPerdido) {this.saldo += montoGanadoOPerdido;}
 
     //getters y setters

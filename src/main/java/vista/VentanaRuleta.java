@@ -99,7 +99,11 @@ public class VentanaRuleta {
 
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(frame, "Por favor, ingrese un monto válido.", "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (Exception ex) {
+        } catch (IllegalStateException ex){
+            JOptionPane.showMessageDialog(frame, ex.getMessage(), "Saldo Insuficiente", JOptionPane.WARNING_MESSAGE);
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(frame, ex.getMessage(), "Datos Inválidos", JOptionPane.WARNING_MESSAGE);
+        }catch (Exception ex) {
             JOptionPane.showMessageDialog(frame, ex.getMessage(), "Error en la Apuesta", JOptionPane.ERROR_MESSAGE);
         }
     }
