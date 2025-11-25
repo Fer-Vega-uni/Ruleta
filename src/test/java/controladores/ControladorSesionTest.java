@@ -1,6 +1,5 @@
 package controladores;
 
-import modelo.Usuario;
 import org.junit.jupiter.api.*;
 
 import java.util.List;
@@ -8,64 +7,25 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ControladorSesionTest {
-    @BeforeAll
-    static void setup(){
-        List<Usuario> usuariosRegistrados;
-    }
+    private ControladorSesion controladorSesion;
 
     @BeforeEach
     void setUp() {
-    }
-
-    @AfterEach
-    void tearDown() {
-    }
-
-    @Test
-    void registrarUsuario() {
+        controladorSesion = new ControladorSesion();
+        controladorSesion.registrarUsuario("fer","111","f");
     }
 
     @Test
-    void iniciarSesion() {
+    void testLoginUsuarioNoRegistrado() {
+        boolean resultado = controladorSesion.iniciarSesion("usuario_fantasma", "1234");
+        assertFalse(resultado, "Debe rechazar login de usuario que no existe");
+        assertFalse(controladorSesion.hayUsuario(), "No debe haber usuario en sesión");
     }
 
     @Test
-    void hayUsuario() {
-    }
-
-    @Test
-    void getNombreUsuario() {
-    }
-
-    @Test
-    void getUsuarioActual() {
-    }
-
-    @Test
-    void cerrarSesion() {
-    }
-
-    @Test
-    void testRegistrarUsuario() {
-    }
-
-    @Test
-    void testIniciarSesion() {
-    }
-
-    @Test
-    void testHayUsuario() {
-    }
-
-    @Test
-    void testGetNombreUsuario() {
-    }
-
-    @Test
-    void testGetUsuarioActual() {
-    }
-
-    @Test
-    void testCerrarSesion() {
+    void testRegistroUsernameNulo() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            controladorSesion.registrarUsuario("Juan", "1234", null);
+        }, "Debe lanzar excepción si el username es null");
     }
 }
